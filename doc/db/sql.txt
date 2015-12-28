@@ -1,0 +1,18 @@
+CREATE TABLE `t_distribute_lock_log_info` (
+  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `lock_client_uuid` VARCHAR(128) NOT NULL DEFAULT '' COMMENT 'client请求分配的唯一UUID',
+  `app_use_distribute_lock` VARCHAR(256) NOT NULL DEFAULT '' COMMENT '使用分布式锁的业务系统名字(部署多台机器上的业务名字)',
+  `client_ip` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '使用分布式锁的客户端ip地址',
+  `lock_critical_key` VARCHAR(1000) NOT NULL DEFAULT '' COMMENT '当前锁对应的zookeeper或是redis中的关键字',  
+  `lock_type` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '分布式锁类型 1:zookeeper分布式锁 2:redis分布式锁',
+  `request_lock_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '请求分布式锁的时间',
+  `is_own_distribute_lock` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '是否获得了分布式锁 0:没有  1:有',
+  `acquire_lock_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '当获取到分布式锁时的获取锁的时间',
+  `release_lock_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '释放锁的时间',
+  `call_method_name` VARCHAR(45) NOT NULL DEFAULT '' COMMENT '产生记录的调用方法',
+  `state` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '1:正常 0：删除',
+  `create_time` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_t_distribute_lock_log` (`lock_client_uuid`)
+) ENGINE=INNODB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8

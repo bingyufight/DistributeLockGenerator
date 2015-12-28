@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.distribute.lock.generator.dbmodule.DistributeLockLogInfoMapper">
+     
+     <resultMap id="distributeLockLogInfoMap" type="com.base.distribute.lock.generator.dbmodule.pojo.DistributeLockLogInfo" >
+     	<result column="id" property="id" />
+		<result column="lock_client_uuid" property="lockClientUuid" />
+		<result column="app_use_distribute_lock" property="appUseDistributeLock" />
+		<result column="client_ip" property="clientIp" />
+		<result column="lock_critical_key" property="lockCriticalKey" />
+		<result column="lock_type" property="lockType" />
+		<result column="request_lock_time" property="requestLockTime" />
+		<result column="is_own_distribute_lock" property="isOwnDistributeLock" />
+		<result column="acquire_lock_time" property="acquireLockTime" />
+		<result column="release_lock_time" property="releaseLockTime" />
+		<result column="call_method_name" property="callMethodName" />
+		<result column="state" property="state" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+	
+     </resultMap>
+
+	<insert id="saveDistributeLockLogInfo" parameterType="DistributeLockLogInfo">
+		INSERT INTO t_distribute_lock_log_info 
+		( 
+			create_time
+			<if test="lockClientUuid != null">
+			,lock_client_uuid
+			</if>
+			<if test="appUseDistributeLock != null">
+			,app_use_distribute_lock
+			</if>
+			<if test="clientIp != null">
+			,client_ip
+			</if>
+			<if test="lockCriticalKey != null">
+			,lock_critical_key
+			</if>
+			<if test="lockType != null">
+			,lock_type
+			</if>
+			<if test="requestLockTime != null">
+			,request_lock_time
+			</if>
+			<if test="isOwnDistributeLock != null">
+			,is_own_distribute_lock
+			</if>
+			<if test="acquireLockTime != null">
+			,acquire_lock_time
+			</if>
+			<if test="releaseLockTime != null">
+			,release_lock_time
+			</if>
+			<if test="callMethodName != null">
+			,call_method_name
+			</if>
+			<if test="state != null">
+			,state
+			</if>
+			<if test="updateTime != null">
+			,update_time
+			</if>
+		)
+		VALUES
+		(
+			now()
+			<if test="lockClientUuid != null">
+			,#{lockClientUuid}
+			</if>
+			<if test="appUseDistributeLock != null">
+			,#{appUseDistributeLock}
+			</if>
+			<if test="clientIp != null">
+			,#{clientIp}
+			</if>
+			<if test="lockCriticalKey != null">
+			,#{lockCriticalKey}
+			</if>
+			<if test="lockType != null">
+			,#{lockType}
+			</if>
+			<if test="requestLockTime != null">
+			,#{requestLockTime}
+			</if>
+			<if test="isOwnDistributeLock != null">
+			,#{isOwnDistributeLock}
+			</if>
+			<if test="acquireLockTime != null">
+			,#{acquireLockTime}
+			</if>
+			<if test="releaseLockTime != null">
+			,#{releaseLockTime}
+			</if>
+			<if test="callMethodName != null">
+			,#{callMethodName}
+			</if>
+			<if test="state != null">
+			,#{state}
+			</if>
+			<if test="updateTime != null">
+			,#{updateTime}
+			</if>
+		)
+	</insert>
+	
+  
+
+	<update id="updateDistributeLockLogInfo" parameterType="DistributeLockLogInfo">
+		update t_distribute_lock_log_info
+	set
+	        state = 1
+		  	<if test="appUseDistributeLock != null">
+			,app_use_distribute_lock = #{appUseDistributeLock}
+			</if>
+			<if test="clientIp != null">
+			,client_ip = #{clientIp}
+			</if>
+			<if test="lockCriticalKey != null">
+			,lock_critical_key = #{lockCriticalKey}
+			</if>
+			<if test="lockType != null">
+			,lock_type = #{lockType}
+			</if>
+			<if test="requestLockTime != null">
+			,request_lock_time = #{requestLockTime}
+			</if>
+			<if test="isOwnDistributeLock != null">
+			,is_own_distribute_lock = #{isOwnDistributeLock}
+			</if>
+			<if test="acquireLockTime != null">
+			,acquire_lock_time = #{acquireLockTime}
+			</if>
+			<if test="releaseLockTime != null">
+			,release_lock_time = #{releaseLockTime}
+			</if>
+			
+			<if test="callMethodName != null">
+			,call_method_name = #{callMethodName}
+			</if>
+			
+			<if test="updateTime != null">
+			,update_time = #{updateTime}
+			</if>
+		    where lock_client_uuid=#{lockClientUuid}		
+	</update>
+	
+	<select id="getDistributeLockLogInfoByUUID" resultType="DistributeLockLogInfo">
+		select * from t_distribute_lock_log_info where lock_client_uuid=#{lockClientUuid}
+	</select>
+	
+
+</mapper>
