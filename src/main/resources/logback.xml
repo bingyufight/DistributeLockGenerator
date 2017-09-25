@@ -5,7 +5,6 @@
 		<resetJUL>true</resetJUL>
 	</contextListener>
 
-	<!-- To enable JMX Management -->
 	<jmxConfigurator />
 
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
