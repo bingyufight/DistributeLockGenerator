@@ -17,7 +17,7 @@
 		<jedis.version>2.7.2</jedis.version>
 		<mysql.version>5.1.33</mysql.version>
 		 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-     <deploy.dir>/apps/java/payment-center/</deploy.dir><!-- 定义编译完成后,待发布文件的拷贝目标目录 -->
+     <deploy.dir>/apps/java/distributedLockGenerator/</deploy.dir><!-- 定义编译完成后,待发布文件的拷贝目标目录 -->
   </properties>
 
   <dependencies>
@@ -126,48 +126,6 @@
 				<scope>test</scope>
 			</dependency>
   </dependencies>
-   <build>
-	<plugins>
-				 		<!-- maven打jar包插件，打包后不包含pom.xml文件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<archive>
-						<!--打包后不包括pom的描述文件-->
-						<addMavenDescriptor>false</addMavenDescriptor>
-						<!--Maven在生成jar时，并不知道这个jar是lib还是app，所以使用以下这个插件告之MAVEN这个jar为app，指定main类-->
-						<manifest>
-							<mainClass>com.dafy.zeus.paymentcenter.rpc.provider.server.ServerMain</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-				<!-- 打jar包时需要把配置文件给排除在外  -->
-				<executions>
-					<execution>
-						<id>jarexclude</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<!-- 考虑不要把配置文件信息打包到jar文件里,这样就可以只修改配置文件,不用修改到jar,部署时相对灵活一些 -->
-						<configuration>
-							<outputDirectory>${project.build.directory}/lib/</outputDirectory>
-							<excludes>
-								<exclude>*.properties</exclude>
-								<exclude>*.bat</exclude>
-								<exclude>*.conf</exclude>
-								<exclude>*.sh</exclude>
-							</excludes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			
-		
-				
-			</plugins>
-	</build>
+
   
 </project>
