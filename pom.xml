@@ -85,7 +85,7 @@
 			</dependency>
     
     
-    		 <!-- redis.clients begin -->
+    		 
 		  	<dependency>
 			    <groupId>redis.clients</groupId>
 			    <artifactId>jedis</artifactId>
